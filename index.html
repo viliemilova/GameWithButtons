@@ -1,0 +1,61 @@
+<html>
+<title>Игра с бутони и числа</title>
+<body style="background-color: lime; font-size: 30">
+<label id=4>Брой животи: 3</label><br>
+<label id=1>Точки: 0</label><br>
+<button onclick="location.reload()">Нова игра</button>
+<button id=3 onclick="start()" style="font-size: 40">
+С Т А Р Т</button>
+<button id=2 style="position: absolute; width: 50; height: 50;
+border: none; background-color: lime; font-size: 30" 
+onclick="action()"></button>
+<script>
+alert("Събирай само четните жълти и нечетните бели кутийки!");
+var start=function()
+{
+document.getElementById("3").disabled=true;
+s=setInterval(move, 2000);
+}
+var s;
+var btn=document.getElementById("2");
+var w=window.innerWidth-50;
+var h=window.innerHeight-50;
+var n, color;
+var move=function()
+{
+ok=0;
+var x=Math.floor(Math.random()*w);
+var y=Math.floor(Math.random()*h);
+btn.style.top=y;
+btn.style.left=x;
+n=Math.floor(Math.random()*99+1);
+btn.textContent=n;
+color=Math.floor(Math.random()*2);
+if(color==0) btn.style.backgroundColor="yellow";
+else btn.style.backgroundColor="white";
+}
+var points=0, lifes=3;
+var ok=0;
+var action=function()
+{
+if(ok==1) return;
+ok=1;
+if(n%2==color)
+{
+points=points+n;
+document.getElementById("1").innerHTML="Точки: "+points;
+}
+else
+{
+lifes--;
+document.getElementById("4").innerHTML="Животи: "+lifes;
+if(lifes==0)
+{
+clearInterval(s);
+alert("Край!");
+}
+}
+}
+</script>
+</body>
+</html>
